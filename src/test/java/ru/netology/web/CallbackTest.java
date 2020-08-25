@@ -12,14 +12,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.openqa.selenium.By.cssSelector;
 
 class CallbackTest {
     private WebDriver driver;
 
+
     @BeforeAll
     static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "./driver/mac/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
     }
+
 
     @BeforeEach
     void setUp() {
@@ -33,27 +36,14 @@ class CallbackTest {
     }
 
     @Test
-    void shouldTestV1() {
+    void shouldTestV1 (){
         driver.get("http://localhost:9999");
-        List<WebElement> elements = driver.findElements(By.className("input__control"));
-        elements.get(0).sendKeys("Василий");
-        elements.get(1).sendKeys("+79270000000");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button")).click();
-        String text = driver.findElement(By.className("alert-success")).getText();
-        assertEquals("Ваша заявка успешно отправлена!", text.trim());
-    }
-
-    @Test
-    void shouldTestV2() {
-        driver.get("http://localhost:9999");
-        WebElement form = driver.findElement(By.cssSelector("[data-test-id=callback-form]"));
-        form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Василий");
-        form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79270000000");
-        form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
-        form.findElement(By.cssSelector("[data-test-id=submit]")).click();
-        String text = driver.findElement(By.className("alert-success")).getText();
-        assertEquals("Ваша заявка успешно отправлена!", text.trim());
+        driver.findElement(cssSelector("[type='text']")).sendKeys("Вася");
+        driver.findElement(cssSelector("[type='tel']")).sendKeys("+79169682121");
+        driver.findElement(cssSelector("[class='checkbox__box']")).click();
+        driver.findElement(cssSelector("[role='button']")).click();
+        String elementText = driver.findElement(cssSelector("[data-test-id='order-success']")).getText();
+        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", elementText.trim());
     }
 }
 
