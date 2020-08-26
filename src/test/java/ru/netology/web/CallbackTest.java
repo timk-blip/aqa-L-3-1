@@ -20,7 +20,7 @@ class CallbackTest {
 
     @BeforeAll
     static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "driver/linux/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "dwfqw/linux/chromedriver");
     }
 
 
