@@ -22,5 +22,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
+systemProperty "webdriver.chrome.driver", 
+        classpath.find { 
+            it.name.contains("selenium-chrome-driver")
+        }./driver/win/chromedriver.exe
 }
