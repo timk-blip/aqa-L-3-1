@@ -21,6 +21,8 @@ class CallbackTest {
     @BeforeAll
     static void setUpAll() {
         System.setProperty("webdriver.chrome.driver", "driver/linux/chromedriver");
+        options = new ChromeOptions();
+        options.addArguments("--headless");
     }
 
 
